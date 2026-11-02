@@ -1,0 +1,9 @@
+The procedural parameters in bundle.json and their generated geometric scenes
+are dedicated to the public domain under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+They contain no nuScenes recordings, annotations, images, LiDAR samples or
+published detector outputs. They are illustrative UI fixtures, not benchmark
+predictions. This dedication applies only to this procedural bundle and its
+generated geometry/road illustrations; it does not relicense project source,
+upstream software, recorded data or historical media.

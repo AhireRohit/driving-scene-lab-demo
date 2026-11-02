@@ -1,0 +1,14 @@
+{
+  "title": "Driving Scene Lab",
+  "subtitle": "3D Tracking & Sensor Failure Analysis",
+  "kind": "procedural illustration, not recorded data or detector inference",
+  "license": "CC0-1.0",
+  "seed": 24,
+  "frames": 24,
+  "frame_interval_s": 0.5,
+  "scenes": {
+    "demo-crossing": {"description": "Procedural crossing with moving cars and a pedestrian", "offset": 0},
+    "demo-overtake": {"description": "Procedural overtaking scene with different object speeds", "offset": 7},
+    "demo-intersection": {"description": "Procedural intersection with a retiring example track", "offset": -5}
+  }
+}

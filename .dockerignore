@@ -1,0 +1,11 @@
+**
+!app.py
+!requirements-demo.txt
+!src/
+!src/**
+!assets/
+!assets/**
+!demo/
+!demo/**
+**/__pycache__/
+**/*.pyc

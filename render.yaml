@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: driving-scene-lab
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-demo.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120 app:server
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10

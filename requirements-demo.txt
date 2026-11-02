@@ -1,0 +1,7 @@
+dash==4.5.0
+plotly==7.1.0
+numpy==1.26.4
+scipy==1.17.1
+pillow==13.0.0
+pyquaternion==0.9.9
+gunicorn==23.0.0
