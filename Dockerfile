@@ -6,7 +6,7 @@ RUN useradd --create-home --uid 1000 appuser
 COPY --chown=appuser app.py .
 COPY --chown=appuser src ./src
 COPY --chown=appuser assets ./assets
-COPY --chown=appuser demo ./demo
+COPY --chown=appuser recorded_bundle ./recorded_bundle
 USER appuser
 ENV PORT=7860
 EXPOSE 7860

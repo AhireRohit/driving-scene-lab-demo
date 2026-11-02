@@ -1,0 +1,117 @@
+{
+  "source": {
+    "artifact": "mctrack_val.json",
+    "source_repository": "https://github.com/megvii-research/MCTrack",
+    "source_folder": "https://drive.google.com/drive/folders/15QDnPR9t3FO18fVzCyqUu4h-7COl9Utd",
+    "source_file_id": "1VsKIyVVkjrj4x70Q3O34b4t_f_R8AjPW",
+    "download_url": "https://drive.google.com/uc?export=download&id=1VsKIyVVkjrj4x70Q3O34b4t_f_R8AjPW",
+    "sha256": "4186f748f91e071c1276287244e23a01da5908a373af85ee2dfb08ea935b903e",
+    "bytes": 311732578,
+    "split": "nuScenes val (publisher folder/name; token coverage verified locally)",
+    "detector": "CenterPoint (publisher folder label)",
+    "checkpoint": "not specified with artifact",
+    "detector_config": "not specified with artifact",
+    "sweeps": "not specified with artifact; temporal causality unverified",
+    "training_overlap": "Exact checkpoint training unverified. Mini split names alone do not establish separation from the full detector training split.",
+    "license": "Upstream code licenses retained; prediction/data redistribution terms not established. Artifact excluded from Git; no hosted deployment.",
+    "retrieved_date": "2026-11-01"
+  },
+  "sha256": "4186f748f91e071c1276287244e23a01da5908a373af85ee2dfb08ea935b903e",
+  "source_tokens": 6019,
+  "source_boxes": 701323,
+  "source_classes": {
+    "car": 131339,
+    "truck": 47114,
+    "construction_vehicle": 28775,
+    "bus": 8107,
+    "trailer": 18844,
+    "barrier": 100880,
+    "motorcycle": 47301,
+    "bicycle": 81658,
+    "pedestrian": 127608,
+    "traffic_cone": 109697
+  },
+  "meta": {
+    "use_camera": false,
+    "use_lidar": true,
+    "use_radar": false,
+    "use_map": false,
+    "use_external": false
+  },
+  "scenes": [
+    {
+      "scene": "scene-0061",
+      "covered": 0,
+      "total": 39,
+      "complete": false,
+      "boxes": 0
+    },
+    {
+      "scene": "scene-0103",
+      "covered": 40,
+      "total": 40,
+      "complete": true,
+      "boxes": 6393
+    },
+    {
+      "scene": "scene-0553",
+      "covered": 41,
+      "total": 41,
+      "complete": true,
+      "boxes": 4163
+    },
+    {
+      "scene": "scene-0655",
+      "covered": 0,
+      "total": 41,
+      "complete": false,
+      "boxes": 0
+    },
+    {
+      "scene": "scene-0757",
+      "covered": 0,
+      "total": 41,
+      "complete": false,
+      "boxes": 0
+    },
+    {
+      "scene": "scene-0796",
+      "covered": 40,
+      "total": 40,
+      "complete": true,
+      "boxes": 3065
+    },
+    {
+      "scene": "scene-0916",
+      "covered": 41,
+      "total": 41,
+      "complete": true,
+      "boxes": 6680
+    },
+    {
+      "scene": "scene-1077",
+      "covered": 0,
+      "total": 41,
+      "complete": false,
+      "boxes": 0
+    },
+    {
+      "scene": "scene-1094",
+      "covered": 0,
+      "total": 40,
+      "complete": false,
+      "boxes": 0
+    },
+    {
+      "scene": "scene-1100",
+      "covered": 0,
+      "total": 40,
+      "complete": false,
+      "boxes": 0
+    }
+  ],
+  "mini_covered": 162,
+  "mini_total": 404,
+  "coordinates": "global meters; size [width,length,height]; quaternion [w,x,y,z]; velocity global m/s",
+  "causality": "Tracker is forward-only; detector sweep/temporal preprocessing is unspecified by artifact publisher."
+}

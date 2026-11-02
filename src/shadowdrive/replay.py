@@ -16,8 +16,13 @@ AMBER = '#ffbc66'
 
 
 class Replay:
-    def __init__(self, root, output, demo=False):
+    def __init__(self, root, output, demo=False, recorded_bundle=None):
         self.demo=False
+        if recorded_bundle is not None:
+            if demo:raise ValueError('Recorded replay cannot use procedural mode')
+            from .portable import initialize_recorded
+            initialize_recorded(self,root,recorded_bundle)
+            return
         if demo:
             from .demo import initialize_demo
             initialize_demo(self,root)
@@ -110,8 +115,8 @@ class Replay:
         return fig
 
 
-def create_app(root, output=None, demo=False):
-    replay = Replay(root, output, demo=demo)
+def create_app(root, output=None, demo=False, recorded_bundle=None):
+    replay = Replay(root, output, demo=demo,recorded_bundle=recorded_bundle)
     app = Dash(__name__, assets_folder=str(Path(root)/'assets'), title='Driving Scene Lab — 3D Tracking & Sensor Failure Analysis')
     scenes = sorted(replay.tracks['scenes'])
     default = 'scene-0916' if 'scene-0916' in scenes else scenes[0]
@@ -155,15 +160,20 @@ def create_app(root, output=None, demo=False):
                         html.Details([html.Summary('Earlier research & annotation views'),html.P('These retained views predate the learned tracker. Scene-0061 mapping and track identities use annotations.'),
                             html.A('Open archived 4D scene (GT)',href='/archive/animated_4d_scene.html',target='_blank'),html.Br(),
                             html.A('Open archived static map (GT masks)',href='/archive/static_map_scene-0061.html',target='_blank'),html.Br(),
-                            html.A('Earlier camera benchmark',href='/archive/camera_robustness_multiframe.png',target='_blank')]) if not replay.demo else None],className='metrics-panel')],className='bottom-grid'),
+                            html.A('Earlier camera benchmark',href='/archive/camera_robustness_multiframe.png',target='_blank')]) if not replay.demo and recorded_bundle is None else None],className='metrics-panel')],className='bottom-grid'),
             ])
         ],className='shell')
     ])
     from flask import send_from_directory, abort
+    @app.server.get('/data-license')
+    def data_license():
+        if recorded_bundle is None:abort(404)
+        from flask import Response
+        return Response((Path(recorded_bundle)/'DATA_LICENSE.md').read_text(encoding='utf-8'),mimetype='text/plain')
     @app.server.route('/archive/<path:filename>')
     def archive(filename):
         allowed = {'animated_4d_scene.html','static_map_scene-0061.html','camera_robustness_multiframe.png'}
-        if replay.demo or filename not in allowed:
+        if replay.demo or recorded_bundle is not None or filename not in allowed:
             abort(404)
         return send_from_directory(Path(root)/'outputs/visualizations',filename)
 
@@ -199,9 +209,13 @@ def create_app(root, output=None, demo=False):
         clean,camera_from_world,K=replay.sensors.camera(token)
         camera=frame.get('camera')
         mode=camera['mode'] if camera else experiment
-        image=overlay(corrupt_camera(clean,mode),tracks,camera_from_world,K)
-        if camera:image=overlay_observations(image,camera['detections'],label='Illustration' if replay.demo else 'YOLO')
+        conditioned=replay.sensors.conditioned_camera(token,mode) if hasattr(replay.sensors,'conditioned_camera') else corrupt_camera(clean,mode)
+        image=overlay(conditioned,tracks,camera_from_world,K)
+        if camera:
+            observations=replay.sensors.display_observations(token,camera['detections']) if hasattr(replay.sensors,'display_observations') else camera['detections']
+            image=overlay_observations(image,observations,label='Illustration' if replay.demo else 'YOLO')
         camera_caption='Magenta 2D boxes: actual cached YOLO observations from this image condition. 3D boxes: sensor-evidence colors. Clean reference is visualization only; blackout contributes zero camera observations.' if camera else 'Legacy replay: camera pixels do not generate these LiDAR tracks.'
+        if recorded_bundle is not None:camera_caption=html.Div([camera_caption,' ',html.A('Data credits & license',href='/data-license',target='_blank')])
         notes={'clean':'Normal inputs: published LiDAR detections and cached clean-image YOLO.',
                'degraded':'During the selected window Cached YOLO observations use blur 3, brightness 0.55, noise sigma 12 and 12% occlusion. Clean observations resume afterward.',
                'blackout':'During the selected window there are no camera observations. Unchanged LiDAR is an independence baseline, not proof of fusion recovery.',

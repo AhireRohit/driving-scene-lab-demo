@@ -5,7 +5,7 @@
 !src/**
 !assets/
 !assets/**
-!demo/
-!demo/**
+!recorded_bundle/
+!recorded_bundle/**
 **/__pycache__/
 **/*.pyc
