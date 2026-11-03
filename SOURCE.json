@@ -1,7 +1,7 @@
 {
   "project": "Driving Scene Lab \u2014 3D Tracking & Sensor Failure Analysis",
   "source_repository": "https://github.com/AhireRohit/driving-scene-lab",
-  "source_commit": "727008aa10dd307ee54dff5527b44c82a6f23669",
+  "source_commit": "cf2145478c7851e9aab76f102a6c3f8e901270bb",
   "purpose": "Original recorded replay, four nuScenes scenes, 162 frames; no generated replacement",
   "asset_manifest_sha256": "c00cd7d985e2e4d24a9864f05e0762c680204dda1b0bae64c0d5889b52cb07bc",
   "asset_license": "CC BY-NC-SA 4.0 plus nuScenes Dataset Terms; see recorded_bundle/DATA_LICENSE.md"

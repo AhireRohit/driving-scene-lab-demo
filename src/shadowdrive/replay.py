@@ -3,7 +3,7 @@ from functools import lru_cache
 from pathlib import Path
 import numpy as np
 import plotly.graph_objects as go
-from dash import Dash, Input, Output, State, ctx, dcc, html
+from dash import Dash, Input, Output, State, ClientsideFunction, no_update, dcc, html
 
 from .detections import read_mini
 from .sensors import SensorStore, corners, EDGES, corrupt_camera, image_uri, overlay, overlay_observations
@@ -59,13 +59,14 @@ class Replay:
         tokens = scene['tokens']
         xyz,matrix = self.cloud(tokens[index])
         origin = self.cloud(tokens[0])[1][:3,3]
-        xyz = xyz-origin
+        # Rendering coordinates only: retain every sampled point, halve transfer size.
+        xyz = (xyz-origin).astype(np.float32)
         fig = go.Figure()
         if map_on:
             # Past-only accumulation, no annotation masking and no future frames.
             past = [self.cloud(t)[0][::6]-origin for t in tokens[max(0,index-11):index]]
             if past:
-                bg = np.vstack(past)
+                bg = np.vstack(past).astype(np.float32)
                 fig.add_trace(go.Scatter3d(x=bg[:,0],y=bg[:,1],z=bg[:,2],mode='markers',
                     marker={'size':1,'color':'#344858','opacity':.35},name='Past scans',hoverinfo='skip'))
         fig.add_trace(go.Scatter3d(x=xyz[:,0],y=xyz[:,1],z=xyz[:,2],mode='markers',
@@ -123,6 +124,8 @@ def create_app(root, output=None, demo=False, recorded_bundle=None):
     covered = replay.coverage['mini_covered']
     app.layout = html.Div([
         dcc.Store(id='playing',data=False), dcc.Interval(id='clock',interval=650,disabled=True),
+        dcc.Store(id='frame-rendered'),
+        dcc.Store(id='scene-counts',data={name:len(replay.tracks['scenes'][name]['tokens']) for name in scenes}),
         html.Header([html.Div([html.Span('D',className='monogram'),html.Div([html.H1('Driving Scene Lab'),html.P('3D Tracking & Sensor Failure Analysis')])]),
                      html.Div([html.Span(className='live-dot'),'PROCEDURAL DEMO' if replay.demo else 'CACHED RESULTS',html.Small(f'{len(scenes)} illustrative scenes' if replay.demo else f'{len(scenes)} scenes · {covered}/404 frames')],className='header-state')]),
         html.Div([
@@ -177,17 +180,13 @@ def create_app(root, output=None, demo=False, recorded_bundle=None):
             abort(404)
         return send_from_directory(Path(root)/'outputs/visualizations',filename)
 
-    @app.callback(Output('frame','value'),Output('frame','max'),Output('frame','marks'),Output('clock','disabled'),Output('play','children'),Output('playing','data'),
-                  Input('scene','value'),Input('clock','n_intervals'),Input('play','n_clicks'),Input('reset','n_clicks'),State('frame','value'),State('playing','data'))
-    def transport(scene, ticks, clicks, reset, frame, playing):
-        count = len(replay.tracks['scenes'][scene]['tokens'])
-        if ctx.triggered_id in ('scene','reset'):
-            frame=0;playing=False
-        elif ctx.triggered_id=='play':
-            playing=not playing
-        elif ctx.triggered_id=='clock' and playing:
-            frame=(int(frame)+1)%count
-        return frame,count-1,{i:str(i) for i in range(0,count,10)},not playing,'Ⅱ Pause' if playing else '▶ Play',playing
+    # Keep transport local: a slow frame response must never queue more frames
+    # or delay Pause/scene selection behind a server roundtrip.
+    app.clientside_callback(ClientsideFunction(namespace='replay',function_name='transport'),
+                  Output('frame','value'),Output('frame','max'),Output('frame','marks'),Output('clock','disabled'),Output('play','children'),Output('playing','data'),
+                  Input('scene','value'),Input('clock','n_intervals'),Input('play','n_clicks'),Input('reset','n_clicks'),
+                  Input('experiment','value'),Input('duration','value'),Input('method','value'),
+                  State('frame','value'),State('playing','data'),State('frame-rendered','data'),State('scene-counts','data'))
 
     @app.callback(Output('track','options'),Output('track','value'),Input('scene','value'),Input('experiment','value'),Input('duration','value'),Input('method','value'),State('track','value'))
     def track_options(scene,experiment,duration,method,selected):
@@ -196,11 +195,11 @@ def create_app(root, output=None, demo=False, recorded_bundle=None):
             ids=sorted({p['tracking_id'] for f in current['normal'].values() for p in f['all_tracks']})
         else:
             ids=sorted({p['tracking_id'] for variant in ('normal','detection_gap') for f in replay.tracks['scenes'][scene][variant].values() for p in f['tracks']})
-        return [{'label':':'.join(t.split(':')[-2:]),'value':t} for t in ids],selected if selected in ids else None
+        return [{'label':':'.join(t.split(':')[-2:]),'value':t} for t in ids],no_update if selected is None or selected in ids else None
 
     @app.callback(Output('world','figure'),Output('camera','src'),Output('reference','src'),Output('frame-title','children'),Output('frame-badge','children'),
                   Output('stats','children'),Output('timecode','children'),Output('scene-description','children'),Output('experiment-note','children'),
-                  Output('camera-caption','children'),Output('track-table','children'),Output('track-detail','children'),Output('metrics','children'),
+                  Output('camera-caption','children'),Output('track-table','children'),Output('track-detail','children'),Output('metrics','children'),Output('frame-rendered','data'),
                   Input('scene','value'),Input('frame','value'),Input('experiment','value'),Input('confidence','value'),Input('layers','value'),Input('track','value'),Input('duration','value'),Input('method','value'))
     def update(scene_name,index,experiment,confidence,layers,selected,duration,method):
         scene,index,token,frame,variant=replay.get_frame(scene_name,index,experiment,duration,method)
@@ -283,5 +282,6 @@ def create_app(root, output=None, demo=False, recorded_bundle=None):
             metricview=[html.P('Legacy baseline'),html.P(f'{m["matched"]}/{m["gt_boxes"]} matched observations; {m["unmatched_predictions"]} unmatched predictions.')]
         badge=frame['input_status'].replace('_',' ')
         if camera:badge+=f' / camera {mode}'
-        return figure,image_uri(image),image_uri(clean),f'{scene_name} / frame {index:02d}',badge,stats,f'+{elapsed:.2f}s',scene['description'],note,camera_caption,table,detail,metricview
+        rendered={'scene':scene_name,'frame':index,'experiment':experiment,'duration':int(duration),'method':method}
+        return figure,image_uri(image),image_uri(clean),f'{scene_name} / frame {index:02d}',badge,stats,f'+{elapsed:.2f}s',scene['description'],note,camera_caption,table,detail,metricview,rendered
     return app
