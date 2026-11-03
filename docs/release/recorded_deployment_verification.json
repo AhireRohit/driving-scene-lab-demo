@@ -1,0 +1,63 @@
+{
+  "verified_on": "2026-11-03",
+  "url": "https://driving-scene-lab.onrender.com/",
+  "deployment_repository": "https://github.com/AhireRohit/driving-scene-lab-demo",
+  "runtime_commit": "86f873f9650993c5307be48d04bd2a39ec48a242",
+  "deploy_id": "dep-dbkfn1jm8hqs73bb2nl0",
+  "mode": "original-recorded-replay",
+  "scenes": [
+    "0103",
+    "0553",
+    "0796",
+    "0916"
+  ],
+  "frames": 162,
+  "local_tests_passed": 39,
+  "live_http_cases_passed": 46,
+  "bundle_bytes": 95065819,
+  "git_byte_preserved_assets": 1043,
+  "browser_checks": [
+    "all four recorded scenes loaded",
+    "real photographs and point cloud visible",
+    "playback advanced and pause returned",
+    "timeline scrubbed to 10 and 14",
+    "BEV toggle",
+    "selected car:2 evidence ages and association",
+    "combined outage: zero camera and LiDAR observations",
+    "recovery: 49 LiDAR and 5 camera associations",
+    "carry-only policy and 2-frame duration applied",
+    "degraded recorded camera at frame 10",
+    "retired static Space redirects to Render",
+    "no browser console errors in final session"
+  ],
+  "screenshots": [
+    "docs/media/live-recorded-dashboard.jpg",
+    "docs/media/live-recorded-blackout.jpg",
+    "docs/media/live-recorded-recovery.jpg"
+  ],
+  "render": {
+    "plan": "free",
+    "sampled_peak_memory_bytes": 302702600,
+    "memory_limit_bytes": 536870900,
+    "sample_window_utc": "2026-11-02T21:08:00Z/2026-11-02T21:30:00Z",
+    "readiness_probe": "existing TCP; healthz separately checked"
+  },
+  "limitations": [
+    "free-tier cold starts and network-dependent playback",
+    "display photos resized to width 960 and clouds sampled at most 6500 points per scan",
+    "cached model replay; no live inference",
+    "162 of 404 mini frames covered",
+    "unknown original detector provenance details",
+    "camera-policy benefit not established",
+    "MCTrack prediction artifact has no separate license; upstream rights remain applicable"
+  ],
+  "rollout_notes": [
+    "Git CRLF checksum mismatch corrected before final verification",
+    "stale procedural browser tab requests required reload; no procedural fallback"
+  ],
+  "screenshots_sha256": {
+    "docs/media/live-recorded-dashboard.jpg": "629f681dc70af7141bcef44a23e04bd12806bfa40c5de23129ee8ad998e15a98",
+    "docs/media/live-recorded-blackout.jpg": "7156c50355d4dbca2b976d467ae738a381a563cc515e3b856f0163caba418d07",
+    "docs/media/live-recorded-recovery.jpg": "feb0f4a39251a9ad6fcc6b9356dd3b406fdfe910d0e55f4d30c825c7dbe9e2cf"
+  }
+}

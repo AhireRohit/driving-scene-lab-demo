@@ -1,0 +1,374 @@
+{
+  "url": "https://driving-scene-lab.onrender.com",
+  "mode": "original-recorded-replay",
+  "health": {
+    "frames": 162,
+    "mode": "recorded-replay",
+    "scenes": [
+      "scene-0103",
+      "scene-0553",
+      "scene-0796",
+      "scene-0916"
+    ],
+    "status": "ok"
+  },
+  "callback_cases": [
+    {
+      "scene": "scene-0103",
+      "condition": "clean",
+      "frame": 10,
+      "camera_observed": 6,
+      "lidar_observed": 40,
+      "reference_photo_mean_error": 0.013322402263374486
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "clean",
+      "frame": 14,
+      "camera_observed": 9,
+      "lidar_observed": 32,
+      "reference_photo_mean_error": 0.014129372427983539
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "degraded",
+      "frame": 10,
+      "camera_observed": 4,
+      "lidar_observed": 40,
+      "reference_photo_mean_error": 0.013322402263374486
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "degraded",
+      "frame": 14,
+      "camera_observed": 9,
+      "lidar_observed": 32,
+      "reference_photo_mean_error": 0.014129372427983539
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "blackout",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 40,
+      "reference_photo_mean_error": 0.013322402263374486
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "blackout",
+      "frame": 14,
+      "camera_observed": 9,
+      "lidar_observed": 32,
+      "reference_photo_mean_error": 0.014129372427983539
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "gap",
+      "frame": 10,
+      "camera_observed": 5,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.013322402263374486
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "gap",
+      "frame": 14,
+      "camera_observed": 7,
+      "lidar_observed": 32,
+      "reference_photo_mean_error": 0.014129372427983539
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "both",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.013322402263374486
+    },
+    {
+      "scene": "scene-0103",
+      "condition": "both",
+      "frame": 14,
+      "camera_observed": 7,
+      "lidar_observed": 32,
+      "reference_photo_mean_error": 0.014129372427983539
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "clean",
+      "frame": 10,
+      "camera_observed": 3,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0027578446502057614
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "clean",
+      "frame": 14,
+      "camera_observed": 3,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0025276491769547324
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "degraded",
+      "frame": 10,
+      "camera_observed": 2,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0027578446502057614
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "degraded",
+      "frame": 14,
+      "camera_observed": 3,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0025276491769547324
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "blackout",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0027578446502057614
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "blackout",
+      "frame": 14,
+      "camera_observed": 3,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0025276491769547324
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "gap",
+      "frame": 10,
+      "camera_observed": 3,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.0027578446502057614
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "gap",
+      "frame": 14,
+      "camera_observed": 3,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0025276491769547324
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "both",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.0027578446502057614
+    },
+    {
+      "scene": "scene-0553",
+      "condition": "both",
+      "frame": 14,
+      "camera_observed": 3,
+      "lidar_observed": 18,
+      "reference_photo_mean_error": 0.0025276491769547324
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "clean",
+      "frame": 10,
+      "camera_observed": 3,
+      "lidar_observed": 12,
+      "reference_photo_mean_error": 0.014493312757201646
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "clean",
+      "frame": 14,
+      "camera_observed": 2,
+      "lidar_observed": 10,
+      "reference_photo_mean_error": 0.010135030864197531
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "degraded",
+      "frame": 10,
+      "camera_observed": 2,
+      "lidar_observed": 12,
+      "reference_photo_mean_error": 0.014493312757201646
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "degraded",
+      "frame": 14,
+      "camera_observed": 2,
+      "lidar_observed": 10,
+      "reference_photo_mean_error": 0.010135030864197531
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "blackout",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 12,
+      "reference_photo_mean_error": 0.014493312757201646
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "blackout",
+      "frame": 14,
+      "camera_observed": 2,
+      "lidar_observed": 10,
+      "reference_photo_mean_error": 0.010135030864197531
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "gap",
+      "frame": 10,
+      "camera_observed": 3,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.014493312757201646
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "gap",
+      "frame": 14,
+      "camera_observed": 1,
+      "lidar_observed": 10,
+      "reference_photo_mean_error": 0.010135030864197531
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "both",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.014493312757201646
+    },
+    {
+      "scene": "scene-0796",
+      "condition": "both",
+      "frame": 14,
+      "camera_observed": 1,
+      "lidar_observed": 10,
+      "reference_photo_mean_error": 0.010135030864197531
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "clean",
+      "frame": 10,
+      "camera_observed": 8,
+      "lidar_observed": 56,
+      "reference_photo_mean_error": 0.015952289094650206
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "clean",
+      "frame": 14,
+      "camera_observed": 5,
+      "lidar_observed": 49,
+      "reference_photo_mean_error": 0.012678755144032923
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "degraded",
+      "frame": 10,
+      "camera_observed": 3,
+      "lidar_observed": 56,
+      "reference_photo_mean_error": 0.015952289094650206
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "degraded",
+      "frame": 14,
+      "camera_observed": 5,
+      "lidar_observed": 49,
+      "reference_photo_mean_error": 0.012678755144032923
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "blackout",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 56,
+      "reference_photo_mean_error": 0.015952289094650206
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "blackout",
+      "frame": 14,
+      "camera_observed": 5,
+      "lidar_observed": 49,
+      "reference_photo_mean_error": 0.012678755144032923
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "gap",
+      "frame": 10,
+      "camera_observed": 8,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.015952289094650206
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "gap",
+      "frame": 14,
+      "camera_observed": 5,
+      "lidar_observed": 49,
+      "reference_photo_mean_error": 0.012678755144032923
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "both",
+      "frame": 10,
+      "camera_observed": 0,
+      "lidar_observed": 0,
+      "reference_photo_mean_error": 0.015952289094650206
+    },
+    {
+      "scene": "scene-0916",
+      "condition": "both",
+      "frame": 14,
+      "camera_observed": 5,
+      "lidar_observed": 49,
+      "reference_photo_mean_error": 0.012678755144032923
+    },
+    {
+      "method": "policy",
+      "duration": 1,
+      "status": "passed"
+    },
+    {
+      "method": "policy",
+      "duration": 2,
+      "status": "passed"
+    },
+    {
+      "method": "policy",
+      "duration": 4,
+      "status": "passed"
+    },
+    {
+      "method": "carry",
+      "duration": 1,
+      "status": "passed"
+    },
+    {
+      "method": "carry",
+      "duration": 2,
+      "status": "passed"
+    },
+    {
+      "method": "carry",
+      "duration": 4,
+      "status": "passed"
+    }
+  ],
+  "case_count": 46,
+  "real_photographs_verified_against_local_assets": true,
+  "blackout_no_camera_observations": true,
+  "transport_backend": "passed",
+  "license_http_status": 200,
+  "css_http_status": 200,
+  "notes": "These are server/API checks; browser interactions and screenshots are recorded separately."
+}

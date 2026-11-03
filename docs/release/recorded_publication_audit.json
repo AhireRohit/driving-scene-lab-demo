@@ -1,0 +1,39 @@
+{
+  "checked_on": "2026-11-02",
+  "sources": {
+    "nuscenes_terms": {
+      "url": "https://www.nuscenes.org/static/js/TermsOfUseNonCommercial.d9d49b0c.chunk.js",
+      "sha256": "16004e67a806af07ef913d269de0f2a835476b25fa1c585642f1fa1fe1bfeedf",
+      "bytes": 11269,
+      "http_status": 200
+    },
+    "mctrack_readme": {
+      "url": "https://raw.githubusercontent.com/megvii-research/MCTrack/main/README.md",
+      "sha256": "8cb71dad0ec426d9a772088056201d7d7ced928c7c0efb35a2a8757e0fdbe46e",
+      "bytes": 16592,
+      "http_status": 200
+    }
+  },
+  "decision": "Non-commercial original recorded replay with attribution, CC BY-NC-SA 4.0 and additional nuScenes Dataset Terms; not a commercial deployment.",
+  "restrictions_retained": [
+    "non-commercial use",
+    "attribution and indication of display modifications",
+    "share-alike for data derivatives",
+    "third-party exceptions where specified",
+    "no endorsement or association claim",
+    "privacy and other applicable laws"
+  ],
+  "mctrack_notice": "README provides converted nuScenes research data; no separate root LICENSE file or artifact-specific license was supplied. No MCTrack implementation or weights redistributed; third-party rights not waived.",
+  "published_subset": {
+    "scenes": [
+      "0103",
+      "0553",
+      "0796",
+      "0916"
+    ],
+    "frames": 162,
+    "asset_bytes": 95065819,
+    "scenario_files": 60,
+    "camera_packets": 486
+  }
+}
