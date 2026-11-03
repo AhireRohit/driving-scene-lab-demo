@@ -1,8 +1,13 @@
 /* Playback applies backpressure: at most one requested frame awaits a response. */
 (function (root) {
     "use strict";
+    let rendered = null;
+    function acknowledge(frame) {
+        rendered = frame;
+        return frame;
+    }
     function transport(scene, ticks, clicks, reset, experiment, duration, method,
-                       frame, playing, rendered, counts) {
+                       frame, playing, counts) {
         const dc = root.dash_clientside;
         const unchanged = () => Array(6).fill(dc.no_update);
         const changes = (dc.callback_context.triggered || []).map(t => t.prop_id.split(".")[0]).filter(Boolean);
@@ -31,8 +36,8 @@
         }
         return unchanged();
     }
-    if (typeof module !== "undefined" && module.exports) module.exports = transport;
+    if (typeof module !== "undefined" && module.exports) module.exports = {transport, acknowledge};
     root.dash_clientside = Object.assign({}, root.dash_clientside, {
-        replay: Object.assign({}, (root.dash_clientside || {}).replay, {transport: transport})
+        replay: Object.assign({}, (root.dash_clientside || {}).replay, {transport, acknowledge})
     });
 })(typeof window !== "undefined" ? window : globalThis);

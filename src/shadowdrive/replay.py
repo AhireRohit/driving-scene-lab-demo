@@ -125,6 +125,7 @@ def create_app(root, output=None, demo=False, recorded_bundle=None):
     app.layout = html.Div([
         dcc.Store(id='playing',data=False), dcc.Interval(id='clock',interval=650,disabled=True),
         dcc.Store(id='frame-rendered'),
+        dcc.Store(id='frame-applied'),
         dcc.Store(id='scene-counts',data={name:len(replay.tracks['scenes'][name]['tokens']) for name in scenes}),
         html.Header([html.Div([html.Span('D',className='monogram'),html.Div([html.H1('Driving Scene Lab'),html.P('3D Tracking & Sensor Failure Analysis')])]),
                      html.Div([html.Span(className='live-dot'),'PROCEDURAL DEMO' if replay.demo else 'CACHED RESULTS',html.Small(f'{len(scenes)} illustrative scenes' if replay.demo else f'{len(scenes)} scenes · {covered}/404 frames')],className='header-state')]),
@@ -186,7 +187,11 @@ def create_app(root, output=None, demo=False, recorded_bundle=None):
                   Output('frame','value'),Output('frame','max'),Output('frame','marks'),Output('clock','disabled'),Output('play','children'),Output('playing','data'),
                   Input('scene','value'),Input('clock','n_intervals'),Input('play','n_clicks'),Input('reset','n_clicks'),
                   Input('experiment','value'),Input('duration','value'),Input('method','value'),
-                  State('frame','value'),State('playing','data'),State('frame-rendered','data'),State('scene-counts','data'))
+                  State('frame','value'),State('playing','data'),State('scene-counts','data'))
+    # Even a State dependency on the pending response would defer Pause/scene
+    # controls in Dash's scheduler. A separate client callback records completion.
+    app.clientside_callback(ClientsideFunction(namespace='replay',function_name='acknowledge'),
+                  Output('frame-applied','data'),Input('frame-rendered','data'))
 
     @app.callback(Output('track','options'),Output('track','value'),Input('scene','value'),Input('experiment','value'),Input('duration','value'),Input('method','value'),State('track','value'))
     def track_options(scene,experiment,duration,method,selected):
