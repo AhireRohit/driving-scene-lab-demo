@@ -1,0 +1,139 @@
+{
+  "verified_on": "2026-11-04",
+  "url": "https://driving-scene-lab.onrender.com/",
+  "runtime_commit": "173ed48ad60b980324412040618c83344f197abc",
+  "deploy_id": "dep-dbl60iui0phs738jl450",
+  "deploy_status": "live",
+  "local_pytest_passed": 41,
+  "node_regression_cases": 5,
+  "http_photo_condition_cases_passed": 46,
+  "http_cases_runtime_commit": "1048cf55707777fde3c2dae513d322e7ae19a467",
+  "http_cases_note": "The final refinement changed only transport dependencies; the frame/data render callback was unchanged. The final live callback contract was checked separately.",
+  "final_live_contract": {
+    "local_transport": true,
+    "controls_independent_of_pending_render": true,
+    "completion_callback_present": true,
+    "health_status": 200,
+    "frames": 162
+  },
+  "previous_evening_fresh_state_monitor": {
+    "date": "2026-11-03",
+    "duration_seconds": 15,
+    "samples": 13,
+    "distinct_displayed_frames": 13,
+    "max_pending_frames": 1,
+    "paused_scene": "scene-0796",
+    "paused_frame": 15
+  },
+  "outage_preserved": {
+    "scene": "scene-0916",
+    "frame": 10,
+    "camera_observed": 0,
+    "lidar_observed": 0
+  },
+  "recovery_preserved": {
+    "scene": "scene-0916",
+    "frame": 14,
+    "camera_observed": 5,
+    "lidar_observed": 49
+  },
+  "browser_recheck": {
+    "verified_on": "2026-11-04",
+    "switches": [
+      {
+        "from": "scene-0916",
+        "to": "scene-0553",
+        "observedMs": 4785,
+        "state": {
+          "cameraLoaded": true,
+          "frame": 0,
+          "play": "\u25b6 Play",
+          "referenceLoaded": true,
+          "scene": "scene-0553",
+          "title": "scene-0553 / frame 00"
+        }
+      },
+      {
+        "from": "scene-0553",
+        "to": "scene-0796",
+        "observedMs": 2727,
+        "state": {
+          "cameraLoaded": true,
+          "frame": 0,
+          "play": "\u25b6 Play",
+          "referenceLoaded": true,
+          "scene": "scene-0796",
+          "title": "scene-0796 / frame 00"
+        }
+      },
+      {
+        "from": "scene-0796",
+        "to": "scene-0103",
+        "observedMs": 2963,
+        "state": {
+          "cameraLoaded": true,
+          "frame": 0,
+          "play": "\u25b6 Play",
+          "referenceLoaded": true,
+          "scene": "scene-0103",
+          "title": "scene-0103 / frame 00"
+        }
+      },
+      {
+        "from": "scene-0103",
+        "to": "scene-0916",
+        "observedMs": 3930,
+        "state": {
+          "cameraLoaded": true,
+          "frame": 0,
+          "play": "\u25b6 Play",
+          "referenceLoaded": true,
+          "scene": "scene-0916",
+          "title": "scene-0916 / frame 00"
+        }
+      }
+    ],
+    "pause": {
+      "before": {
+        "cameraLoaded": true,
+        "frame": 4,
+        "play": "\u2161 Pause",
+        "referenceLoaded": true,
+        "scene": "scene-0916",
+        "title": "scene-0916 / frame 03"
+      },
+      "afterClick": {
+        "cameraLoaded": true,
+        "frame": 4,
+        "play": "\u25b6 Play",
+        "referenceLoaded": true,
+        "scene": "scene-0916",
+        "title": "scene-0916 / frame 03"
+      },
+      "settled": {
+        "cameraLoaded": true,
+        "frame": 4,
+        "play": "\u25b6 Play",
+        "referenceLoaded": true,
+        "scene": "scene-0916",
+        "title": "scene-0916 / frame 04"
+      }
+    },
+    "consoleErrors": [],
+    "finalState": {
+      "cameraLoaded": true,
+      "frame": 4,
+      "play": "\u25b6 Play",
+      "referenceLoaded": true,
+      "scene": "scene-0916",
+      "title": "scene-0916 / frame 04"
+    }
+  },
+  "cold_start_note": "The 4 November check woke a sleeping free instance; the first 30-second health request timed out. Health and application checks passed after wake-up. No paid resources were selected.",
+  "measurement_note": "Scene timings include browser automation and accessibility refresh overhead; they are observed checks, not a latency SLA.",
+  "before_capture_note": "The native before capture shows scene-0553 frame 27 still playing after selection. Earlier stale text snapshots are not treated as evidence that the physical page remained at frame 0.",
+  "screenshots": {
+    "docs/media/playback-before-fix.jpg": "221e4c7a0883d3d29df65ecc99c6e18be87e81091661daf2c96797b4ce6d76aa",
+    "docs/media/playback-after-fix.jpg": "1559605348140d09785150baef4f554415d2aaf304160b8cc33b5a85b1283ae0"
+  }
+}

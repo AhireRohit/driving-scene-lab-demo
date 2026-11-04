@@ -1,9 +1,9 @@
 {
-  "verified_on": "2026-11-03",
+  "verified_on": "2026-11-04",
   "url": "https://driving-scene-lab.onrender.com/",
   "deployment_repository": "https://github.com/AhireRohit/driving-scene-lab-demo",
-  "runtime_commit": "86f873f9650993c5307be48d04bd2a39ec48a242",
-  "deploy_id": "dep-dbkfn1jm8hqs73bb2nl0",
+  "runtime_commit": "173ed48ad60b980324412040618c83344f197abc",
+  "deploy_id": "dep-dbl60iui0phs738jl450",
   "mode": "original-recorded-replay",
   "scenes": [
     "0103",
@@ -12,7 +12,7 @@
     "0916"
   ],
   "frames": 162,
-  "local_tests_passed": 39,
+  "local_tests_passed": 41,
   "live_http_cases_passed": 46,
   "bundle_bytes": 95065819,
   "git_byte_preserved_assets": 1043,
@@ -28,7 +28,9 @@
     "carry-only policy and 2-frame duration applied",
     "degraded recorded camera at frame 10",
     "retired static Space redirects to Render",
-    "no browser console errors in final session"
+    "no browser console errors in final session",
+    "4 November: all four scene changes reset to frame 0 and paused",
+    "4 November: playback and pause rechecked with fresh accessibility state"
   ],
   "screenshots": [
     "docs/media/live-recorded-dashboard.jpg",
@@ -59,5 +61,7 @@
     "docs/media/live-recorded-dashboard.jpg": "629f681dc70af7141bcef44a23e04bd12806bfa40c5de23129ee8ad998e15a98",
     "docs/media/live-recorded-blackout.jpg": "7156c50355d4dbca2b976d467ae738a381a563cc515e3b856f0163caba418d07",
     "docs/media/live-recorded-recovery.jpg": "feb0f4a39251a9ad6fcc6b9356dd3b406fdfe910d0e55f4d30c825c7dbe9e2cf"
-  }
+  },
+  "previous_runtime_commit": "86f873f9650993c5307be48d04bd2a39ec48a242",
+  "playback_fix_report": "docs/release/playback_update_verification.json"
 }

@@ -1,0 +1,21 @@
+# Scene update and playback fix — verified 4 November 2026
+
+The previous deployment could continue playing after a scene change instead of remaining paused at the new scene's first frame. The retained native screenshot shows scene-0553 at frame 27 with Pause still active after selection. Late timer responses could overwrite the reset. Some browser text snapshots also proved stale; the final checks refresh accessibility state and verify photographs, timeline and screenshots rather than treating an old text snapshot as proof of a stalled scene. Successful HTTP responses alone did not establish correct interactive behavior.
+
+The 650 ms timer previously sent transport requests to the server and advanced frames without waiting for the large camera/3D response. Delayed responses could accumulate while more requests were generated. Pause and scene resets also needed a server response. Repeatedly returning slider bounds and marks added unnecessary updates.
+
+Transport now runs in the browser. Each frame response acknowledges its scene, frame, experiment, duration and output policy. A timer tick advances only when that acknowledgment matches the currently requested state; otherwise it sends no frame request. Pause takes effect locally, and scene changes immediately pause and reset the timeline. Condition, duration and policy changes also pause playback. Slider bounds/marks change only on scene selection/reset. An unchanged track selection no longer triggers a redundant full render.
+
+Point-cloud rendering offsets use float32 instead of float64 after subtracting the scene origin. Every sampled point remains present. Saved source assets, tracking geometry, IDs, evidence, outage/recovery records and benchmark results are unchanged. Playback speed adapts to response time; it does not promise a fixed wall-clock replay rate over a slow connection.
+
+Local validation: 41 pytest tests passed, including five Node regression cases covering 100 timer ticks while a response is pending, scene changes during pending frames, immediate pause, stale acknowledgments after settings changes, and frame wrapping. The server integration test checks the exact frame acknowledgment and float32 transfer. The live HTTP verifier now checks the clientside transport contract instead of calling the removed server transport callback.
+
+Runtime deployment commit: `173ed48ad60b980324412040618c83344f197abc`; Render deployment: `dep-dbl60iui0phs738jl450`, confirmed live. An independent client completion callback keeps transport controls outside the pending server response's dependency chain.
+
+Fresh accessibility checks on 3 November observed all four scene transitions in 2.205–3.342 seconds, with matching scene/title, timeline reset to zero, paused playback and loaded camera/reference images. A 15-second fresh-state playback check observed 13 distinct frames with at most one frame awaiting completion; Pause held scene-0796 at frame 15. Combined outage frame 10 still had zero current sensor observations; frame 14 recovered 49 LiDAR and 5 camera associations. The 46 HTTP photo/condition cases passed on the first playback patch; the render/data callback was unchanged by the final transport-dependency refinement. See `release/playback_update_verification.json` for the subsequent recheck.
+
+Existing open tabs need one reload to load the new callback graph and JavaScript asset. Render's free-tier sleep/cold-start remains separate: the 4 November recheck initially woke a sleeping instance and timed out a 30-second health request before the server resumed responding. This change does not eliminate hosting startup latency or guarantee a fixed replay rate over every network.
+
+## Recheck on 4 November
+
+All four scene selections passed again after the instance woke: 4.785 s to 0553, 2.727 s to 0796, 2.963 s to 0103 and 3.930 s to 0916. Each loaded the camera/reference images, matching scene title, frame 0 and paused playback. Playback advanced; Pause allowed the one in-flight frame to settle and held at scene-0916 frame 4. Health returned 200, the final clientside callback contract matched the deployed fix, and the browser console had no errors. These observed timings include automation overhead. The final screenshot is `media/playback-after-fix.jpg`.

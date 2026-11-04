@@ -367,7 +367,7 @@
   "case_count": 46,
   "real_photographs_verified_against_local_assets": true,
   "blackout_no_camera_observations": true,
-  "transport_backend": "passed",
+  "transport_backend": "clientside acknowledgment-gated; browser/Node checked separately",
   "license_http_status": 200,
   "css_http_status": 200,
   "notes": "These are server/API checks; browser interactions and screenshots are recorded separately."

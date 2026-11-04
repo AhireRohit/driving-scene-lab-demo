@@ -10,6 +10,6 @@ Live application: https://driving-scene-lab.onrender.com/ . Full research histor
 
 Install `pip install -r requirements-demo.txt`, then run `gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120 app:server`. The legacy requirements filename is retained. `render.yaml` selects the free plan; free instances may sleep. `/healthz` reports `recorded-replay`, four scenes and 162 frames. Missing/corrupt assets produce an explicit 503 configuration error, never procedural content. A Dockerfile is included.
 
-Verified 3 November 2026: 39 local tests and 46 live HTTP cases passed. Browser scene selection, playback/pause, scrubbing, BEV, track inspection, outage and recovery were checked. [Verification](docs/release/recorded_deployment_verification.json) · [Deployment details](docs/DEPLOYMENT.md).
+Verified 4 November 2026: 41 local tests and 46 live HTTP cases passed. Browser scene selection, playback/pause, scrubbing, BEV, track inspection, outage and recovery were checked. [Verification](docs/release/recorded_deployment_verification.json) · [Deployment details](docs/DEPLOYMENT.md) · [Playback fix](docs/PLAYBACK_UPDATE_FIX.md). Completion-gated playback prevents frame request buildup; scene changes pause at frame 0. Free-tier cold starts remain possible.
 
-![Live original recorded replay](docs/media/live-recorded-dashboard.jpg)
+![Live original recorded replay](docs/media/playback-after-fix.jpg)
